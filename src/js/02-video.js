@@ -13,9 +13,16 @@ const player = new Player(iframe);
 // });
 
 player.on('timeupdate', throttle(currentTime, 1000));
+player.on('loaded', getCurrentTime);
 
 function currentTime(event) {
   let timeSeconds = event.seconds;
-  console.log(timeSeconds);
-  localStorage.setItem('currentTimeWatchVideo', timeSeconds);
+  localStorage.setItem('videoplayer-current-time', timeSeconds);
+}
+function getCurrentTime() {
+  const getTime = localStorage.getItem('videoplayer-current-time');
+  if (getTime) {
+    player.setCurrentTime(getTime);
+    console.log(getTime);
+  }
 }
