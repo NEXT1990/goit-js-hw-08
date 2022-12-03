@@ -15,10 +15,13 @@ console.log(refs.form);
 console.log(refs.inputMessage);
 
 refs.form.addEventListener('submit', onFormSubmit);
-refs.form.addEventListener('input', event => {
-  formData[event.target.name] = event.target.value;
-  localStorage.setItem(STORAGE_KEY, JSON.stringify({ formData }));
-});
+refs.form.addEventListener(
+  'input',
+  throttle(event => {
+    formData[event.target.name] = event.target.value;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ formData }));
+  }, 500)
+);
 
 function onFormSubmit(event) {
   event.preventDefault();
