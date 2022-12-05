@@ -20,8 +20,8 @@ refs.form.addEventListener(
   throttle(event => {
     let savedDataLocalStorage = JSON.parse(localStorage.getItem(STORAGE_KEY));
     console.log(savedDataLocalStorage);
-    formData[event.target.name] = event.target.value;
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
+    savedDataLocalStorage[event.target.name] = event.target.value;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(savedDataLocalStorage));
   }, 500)
 );
 
