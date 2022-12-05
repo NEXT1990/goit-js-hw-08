@@ -20,15 +20,17 @@ refs.form.addEventListener(
   throttle(event => {
     let savedDataLocalStorage = JSON.parse(localStorage.getItem(STORAGE_KEY));
     console.log(savedDataLocalStorage);
-    savedDataLocalStorage[event.target.name] = event.target.value;
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(savedDataLocalStorage));
+    if (savedDataLocalStorage) {
+      savedDataLocalStorage[event.target.name] = event.target.value;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(savedDataLocalStorage));
+    }
   }, 500)
 );
 
 function onFormSubmit(event) {
   event.preventDefault();
   JSON.parse(localStorage.getItem(STORAGE_KEY));
-
+  console.log(JSON.parse(localStorage.getItem(STORAGE_KEY)));
   event.currentTarget.reset();
   localStorage.removeItem(STORAGE_KEY);
 }
